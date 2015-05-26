@@ -1,0 +1,14 @@
+<template name="booksMenu">
+  <div class="bar bar-header bar-dark">
+    <h1 class="title">选择书卷</h1>
+  </div>
+  {{#ionView}}
+  {{#ionContent}}
+  <div class="list">
+    {{#each booksList}}
+      {{> bookItem}}
+    {{/each}}
+  </div>
+  {{/ionContent}}
+  {{/ionView}}
+</template>

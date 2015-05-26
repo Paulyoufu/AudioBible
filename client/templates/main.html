@@ -1,0 +1,24 @@
+<template name="main">
+
+	{{#contentFor "headerTitle"}}
+		<button class="button button-clear pull-left" data-ion-menu-toggle="left">
+	       <!-- {{> ionIcon icon='navicon'}}       -->
+	       书卷
+	    </button>
+	    <h1 class="title ">{{bookName}} 第{{chapterSN}}章</h1>
+	    <button class="button button-clear pull-right" data-ion-menu-toggle="right">
+	        <!-- {{> ionIcon icon='navicon'}} -->
+	        章 
+	    </button>
+	{{/contentFor}}
+
+    {{#ionView}}
+    {{#ionContent}}
+    	<div class="list">
+          {{#each lectionList}}
+          		{{> lectionItem}}
+          {{/each}}
+        </div>
+    {{/ionContent}}
+  {{/ionView}}
+</template>

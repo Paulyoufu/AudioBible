@@ -1,0 +1,16 @@
+<template name="chaptersMenu">
+
+	<div class="bar bar-header bar-dark">
+		<h1 class="title">选择章 </h1>
+	</div>
+
+	{{#ionView}}
+	{{#ionContent}}
+	<div class="list">
+		{{#each chapters}}
+			{{> chapterItem}}
+		{{/each}}
+	</div>
+	{{/ionContent}}
+	{{/ionView}}
+</template>

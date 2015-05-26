@@ -1,0 +1,32 @@
+<template name="layout">
+  {{#ionBody}}
+
+    {{#ionSideMenuContainer}}
+
+      {{#ionSideMenus}}
+
+        {{#ionSideMenu side="left"}}
+          {{> booksMenu}}
+        {{/ionSideMenu}}
+
+        {{#ionSideMenu side="right"}}
+          {{> chaptersMenu}}
+        {{/ionSideMenu}}
+
+      {{/ionSideMenus}}
+
+
+      {{#ionSideMenuContent}}
+
+        {{> ionNavBar class="bar-positive"}}
+        {{#ionNavView}}
+          {{> main}}
+        {{/ionNavView}}
+      {{/ionSideMenuContent}}
+
+    {{/ionSideMenuContainer}}
+
+    {{> footer}}
+
+  {{/ionBody}}
+</template>

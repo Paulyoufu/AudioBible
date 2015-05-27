@@ -1,9 +1,13 @@
 <template name="footer">
 	{{#ionFooterBar class="bar-dark"}}
 	<div class="button-bar">
-		<button class="button button-icon icon ion-ios-skipbackward"></button>
-		<button class="button button-icon icon ion-ios-play"></button>
-		<button class="button button-icon icon ion-ios-skipforward"></button>
+		<button class="button button-icon icon ion-ios-skipbackward" data-skipbackward></button>
+		{{#if isPlaying}}
+			<button class="button button-icon icon ion-ios-pause" data-play></button>
+		{{else}}
+			<button class="button button-icon icon ion-ios-play" data-play></button>
+		{{/if}}
+		<button class="button button-icon icon ion-ios-skipforward" data-skipforward></button>
 	</div>
 	{{/ionFooterBar}}
 </template>

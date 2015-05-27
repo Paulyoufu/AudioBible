@@ -3,7 +3,7 @@ Session.setDefault('lectionList', []);          //经文list
 Session.setDefault('currentBook', 1);           //当前书卷SN
 Session.setDefault('currentBookName', '创世记'); //当前书卷名字
 Session.setDefault('currentChapter', 1);        //当前章SN
-Session.setDefault('currentChapterCount', 0);   //当前书卷章数
+Session.setDefault('currentChapterCount', 50);  //当前书卷章数
 
 // volumeSN 书卷号 chapterSN 章号
 getLection = function (volumeSN, chapterSN) {

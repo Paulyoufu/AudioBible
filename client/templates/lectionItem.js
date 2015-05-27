@@ -1,5 +1,5 @@
 Template.lectionItem.events({
-	'click .item': function () {
-		
-	}
+    'click .item': function () {
+
+    }
 });

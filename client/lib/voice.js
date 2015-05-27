@@ -34,7 +34,6 @@ abcGlobal.Media.on_audio = function(){
       var url = "application/voice/" + Session.get('currentBookName') + "第" + chapterNo + "章.mp3";
       _myMedia = new Media(url, successCallback, errorCallback, statusCallback);
       _myMedia.play();
-      Session.set('currentChapter', chapterNo);
    }else{
       //跳转到上一卷书
       alert("功能暂未实现！");
@@ -52,7 +51,6 @@ abcGlobal.Media.Under_audio = function(){
     var url = "application/voice/" + Session.get('currentBookName') + "第" + chapterNo + "章.mp3";
     _myMedia = new Media(url, successCallback, errorCallback, statusCallback);
     _myMedia.play();
-    Session.set('currentChapter', chapterNo);
   }else{
     //跳转到下一卷书
     alert("功能暂为实现！");

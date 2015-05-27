@@ -4,6 +4,8 @@ Session.setDefault('currentBook', 1);           //当前书卷SN
 Session.setDefault('currentBookName', '创世记'); //当前书卷名字
 Session.setDefault('currentChapter', 1);        //当前章SN
 Session.setDefault('currentChapterCount', 50);  //当前书卷章数
+Session.setDefault('chapterCountIndex', {});    //每卷书章数索引
+Session.setDefault('bookNameIndex', {});        //每卷书名字索引
 
 // volumeSN 书卷号 chapterSN 章号
 getLection = function (volumeSN, chapterSN) {
@@ -56,6 +58,8 @@ getBooksList = function (newOrOld) {
       function(tx, res) {
 
         var booksList = [];
+        var bookNameIndex = {};
+        var chapterCountIndex = {};
 
         //循环显示结果
         for(var i=0;i<res.rows.length;i++)
@@ -66,12 +70,76 @@ getBooksList = function (newOrOld) {
           bookItem.fullName = res.rows.item(i).fullname;
           booksList.push(bookItem);
           // console.log(res.rows.item(i).fullname);
+
+          //初始化书名索引、章数索引
+          bookNameIndex['bookSN' + res.rows.item(i).sn.toString()] = res.rows.item(i).fullname;
+          chapterCountIndex['bookSN' + res.rows.item(i).sn.toString()] = res.rows.item(i).chapternumber;
         }
         //将查询结果存入Session
         Session.set('booksList', booksList);
+        Session.set('bookNameIndex', bookNameIndex);
+        Session.set('chapterCountIndex', chapterCountIndex);
 
       }, function(e) {
         console.log("ERROR: " + e.message);
       });
   });
+}
+
+//下一章
+nextChapter = function () {
+    var currentBook = Session.get('currentBook');
+    var currentChapter = Session.get('currentChapter');
+    var currentChapterCount = Session.get('currentChapterCount');
+
+    //判断本卷书是否完成
+    if (currentChapter < currentChapterCount){
+      //未完成，切换下一章
+      currentChapter += 1;
+      Session.set('currentChapter', currentChapter);
+    }
+    else{
+      //完成，切换下一卷书
+      if (currentBook === 66){
+        currentBook = 1;
+      }
+      else{
+        currentBook += 1;
+      }
+      currentChapter = 1;
+
+      Session.set('currentBook', currentBook);
+      Session.set('currentChapter', currentChapter);
+      Session.set('currentBookName', Session.get('bookNameIndex')['bookSN'+currentBook]);
+      Session.set('currentChapterCount', Session.get('chapterCountIndex')['bookSN'+currentBook]);
+    }
+}
+
+//上一章
+lastChapter = function () {
+    var currentBook = Session.get('currentBook');
+    var currentChapter = Session.get('currentChapter');
+    var currentChapterCount = Session.get('currentChapterCount');
+
+    //判断是否是本卷书第一章
+    if (currentChapter === 1){
+      //是第一章，切换上一卷书
+      if (currentBook === 1){
+        currentBook = 66;
+      }
+      else{
+        currentBook -= 1;
+      }
+      currentChapter = Session.get('chapterCountIndex')['bookSN'+currentBook];
+
+      Session.set('currentBook', currentBook);
+      Session.set('currentChapter', currentChapter);
+      Session.set('currentBookName', Session.get('bookNameIndex')['bookSN'+currentBook]);
+      Session.set('currentChapterCount', Session.get('chapterCountIndex')['bookSN'+currentBook]);
+    }
+    else{
+      //不是第一章，切换上一章
+      currentChapter -= 1;
+      Session.set('currentChapter', currentChapter);
+    }
 }

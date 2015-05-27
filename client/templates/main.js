@@ -1,3 +1,11 @@
+Template.main.rendered=function()
+{
+    var centreBible=$("#divBible span:eq(19)").position();
+    $("#divBible").scrollTop(centreBible.top-window.screen.height/2+100);
+    $("#divBible span").removeClass("green");
+    $("#divBible span:eq(19)").addClass("green");
+};
+
 Template.main.helpers({
 	lectionList: function () {
 		var currentBook = Session.get('currentBook');
@@ -12,3 +20,4 @@ Template.main.helpers({
 		return Session.get('currentChapter');
 	}
 });
+

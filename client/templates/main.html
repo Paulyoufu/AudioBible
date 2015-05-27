@@ -15,9 +15,15 @@
     {{#ionView}}
     {{#ionContent}}
     	<div class="list">
-          {{#each lectionList}}
-          		{{> lectionItem}}
-          {{/each}}
+            <div id="divBible" style="height:900px;overflow-y:scroll;overflow-x:scroll">
+                <ol>
+                    {{#each lectionList}}
+                      <li style="color:blue"> {{>lectionItem }}</li>
+                    {{/each}}
+                </ol>
+
+            </div>
+
         </div>
     {{/ionContent}}
   {{/ionView}}

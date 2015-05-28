@@ -14,7 +14,7 @@ getLection = function (volumeSN, chapterSN) {
 
   db.transaction(function(tx) {
     //单次查询Bible表
-    var strSQL = "select ID as id,  Lection as lection  from Bible  where  VolumeSN=" + volumeSN + " and ChapterSN=" + chapterSN + " order by ID;";
+    var strSQL = "select ID as id,  Lection as lection, SoundEnd as soundend  from Bible  where  VolumeSN=" + volumeSN + " and ChapterSN=" + chapterSN + " order by ID;";
 
     tx.executeSql(strSQL, [], 
       function(tx, res) {
@@ -24,8 +24,9 @@ getLection = function (volumeSN, chapterSN) {
         for(var i=0;i<res.rows.length;i++)
         {
           var lectionItem = {};
-          lectionItem.chapterSN = i + 1;
+          lectionItem.sectionSN = i + 1;
           lectionItem.lection = res.rows.item(i).lection;
+          lectionItem.soundEnd = res.rows.item(i).soundend;
           lectionList.push(lectionItem);
           //console.log(res.rows.item(i).lection);
         }
@@ -142,4 +143,20 @@ lastChapter = function () {
       currentChapter -= 1;
       Session.set('currentChapter', currentChapter);
     }
+}
+
+//获取当前播放的节
+getCurrSection = function (position) {
+    var currentLection = Session.get('lectionList');
+    var sectionSN = 0;
+
+    for (var i = 0; i < currentLection.length; i++) {
+
+        if (position < currentLection[i].soundEnd){
+            return sectionSN;
+        }
+        sectionSN++;
+    };
+
+    return sectionSN;
 }

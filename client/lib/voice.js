@@ -81,6 +81,8 @@ function timedCount()
      function (position) {
         if(position != dur){
           Session.set('timeValue', position);
+          var sectionSN = getCurrSection(position);
+          BibleScroll(sectionSN);
         }else{
           clearTimeout(t);//停止timeOut
         }

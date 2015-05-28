@@ -1,7 +1,7 @@
 abcGlobal = {};//全局
 abcGlobal.Media = {};//语音功能
 
-Session.setDefault('timeValue', "time");
+Session.setDefault('timeValue', 0);
 //media对象实例
 var _myMedia;
 
@@ -50,6 +50,7 @@ abcGlobal.Media.Under_audio = function(){
 //播放
 abcGlobal.Media.play_audio = function(){
   _myMedia.play();
+  timedCount();
 }
 
 //暂停
@@ -69,22 +70,16 @@ abcGlobal.Media.fast_dorward = function(){
   _myMedia.seekTo(330000);
 }
 
-//每0.5秒 返回当前播放进度 
-abcGlobal.Media.get_position = function(){
-   //获取播放时间
-   timedCount();
-}
-
 var t;
+//返回播放进度
 function timedCount()
 {
-    // var dur = _myMedia.getDuration(); 获取总时间
+   var dur = _myMedia.getDuration(); //获取总时间
 
    _myMedia.getCurrentPosition(
-
      // success callback
      function (position) {
-        if(position != Session.get('timeValue')){
+        if(position != dur){
           Session.set('timeValue', position);
         }else{
           clearTimeout(t);//停止timeOut
@@ -99,6 +94,7 @@ function timedCount()
 //回调的子函数
   var successCallback = function()
   {
+      nextChapter();
       abcGlobal.Media.Under_audio();//下一章
   }
 

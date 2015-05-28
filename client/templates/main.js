@@ -1,5 +1,6 @@
-Template.main.rendered=function()
+Template.main.rendered = function()
 {
+	renderedAudio();
     var centreBible=$("#divBible span:eq(19)").position();
     $("#divBible").scrollTop(centreBible.top-window.screen.height/2+100);
     $("#divBible span").removeClass("green");

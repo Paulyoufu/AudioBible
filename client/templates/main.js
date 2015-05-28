@@ -19,6 +19,9 @@ Template.main.helpers({
 	},
 	chapterSN: function () {
 		return Session.get('currentChapter');
+	},position : function(){
+		return Session.get('timeValue');
 	}
+
 });
 

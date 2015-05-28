@@ -75,6 +75,7 @@ abcGlobal.Media.get_position = function(){
    timedCount();
 }
 
+var t;
 function timedCount()
 {
     var dur = _myMedia.getDuration();
@@ -83,15 +84,13 @@ function timedCount()
 
      // success callback
      function (position) {
-        var value = position + " / " + dur;//当前进度／总进度
-        if(value != Session.get('timeValue')){
-          Session.set('timeValue', value);
+        if(position != Session.get('timeValue')){
+          Session.set('timeValue', position);
         }else{
           clearTimeout(t);//停止timeOut
         }
      }
    );
-
    t = setTimeout(timedCount,500);//每 0.5秒调用一次
 }
 

@@ -78,7 +78,7 @@ abcGlobal.Media.get_position = function(){
 var t;
 function timedCount()
 {
-    var dur = _myMedia.getDuration();
+    // var dur = _myMedia.getDuration(); 获取总时间
 
    _myMedia.getCurrentPosition(
 

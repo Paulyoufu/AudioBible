@@ -66,7 +66,6 @@ abcGlobal.Media.stop_audio = function(){
 //快进
 abcGlobal.Media.fast_dorward = function(){
   //快进到330秒处
-  // 获取当前进度 ＋ 20 秒
   _myMedia.seekTo(330000);
 }
 
@@ -74,13 +73,8 @@ abcGlobal.Media.fast_dorward = function(){
 abcGlobal.Media.get_position = function(){
    //获取播放时间
    timedCount();
- }
- function a(){
-    alert("hahahaha");
-    setTimeout(a, 1000);
- }
+}
 
-var t;
 function timedCount()
 {
     var dur = _myMedia.getDuration();
@@ -93,7 +87,7 @@ function timedCount()
         if(value != Session.get('timeValue')){
           Session.set('timeValue', value);
         }else{
-          clearTimeout(t);
+          clearTimeout(t);//停止timeOut
         }
      }
    );
@@ -118,11 +112,5 @@ function timedCount()
   //回调的子函数
   var statusCallback = function(status)
   {
-      // Media.MEDIA_NONE = 0;
-      // Media.MEDIA_STARTING = 1;
-      // Media.MEDIA_RUNNING = 2;
-      // Media.MEDIA_PAUSED = 3;
-      // Media.MEDIA_STOPPED = 4;
-
-      console.log("Audio Status: " + status);
+      console.log("Audio Status: " + status);//状态
   }

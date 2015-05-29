@@ -5,7 +5,8 @@
 	       <!-- {{> ionIcon icon='navicon'}}       -->
 	       书卷
 	    </button>
-	    <h1 class="title ">{{bookName}} 第{{chapterSN}}章</h1>
+	    <!-- <h1 class="title ">{{bookName}} 第{{chapterSN}}章</h1> -->
+	    <h1 class="title ">{{position}} | {{section}}</h1>
 	    <button class="button button-clear pull-right" data-ion-menu-toggle="right">
 	        <!-- {{> ionIcon icon='navicon'}} -->
 	        章 
@@ -14,17 +15,11 @@
 
     {{#ionView}}
     {{#ionContent}}
-    	<div class="list">
-            <div id="divBible" style="height:900px;overflow-y:scroll;overflow-x:scroll">
-                <ol>
+            <div id="divBible" class="list" style="position:relative;height:100%;overflow-y:scroll;">
                     {{#each lectionList}}
-                      <li style="color:blue"> {{>lectionItem }}</li>
+                     {{>lectionItem }}
                     {{/each}}
-                </ol>
-
             </div>
-
-        </div>
     {{/ionContent}}
   {{/ionView}}
 </template>

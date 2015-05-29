@@ -1,7 +1,7 @@
 abcGlobal = {};//全局
 abcGlobal.Media = {};//语音功能
 
-Session.setDefault('timeValue', "time");
+Session.setDefault('timeValue', 0);
 //media对象实例
 var _myMedia;
 
@@ -50,6 +50,7 @@ abcGlobal.Media.Under_audio = function(){
 //播放
 abcGlobal.Media.play_audio = function(){
   _myMedia.play();
+  timedCount();
 }
 
 //暂停
@@ -66,38 +67,27 @@ abcGlobal.Media.stop_audio = function(){
 //快进
 abcGlobal.Media.fast_dorward = function(){
   //快进到330秒处
-  // 获取当前进度 ＋ 20 秒
   _myMedia.seekTo(330000);
 }
 
-//每0.5秒 返回当前播放进度 
-abcGlobal.Media.get_position = function(){
-   //获取播放时间
-   timedCount();
- }
- function a(){
-    alert("hahahaha");
-    setTimeout(a, 1000);
- }
-
 var t;
+//返回播放进度
 function timedCount()
 {
-    var dur = _myMedia.getDuration();
+   var dur = _myMedia.getDuration(); //获取总时间
 
    _myMedia.getCurrentPosition(
-
      // success callback
      function (position) {
-        var value = position + " / " + dur;//当前进度／总进度
-        if(value != Session.get('timeValue')){
-          Session.set('timeValue', value);
+        if(position != dur){
+          Session.set('timeValue', position);
+          var sectionSN = getCurrSection(position);
+          BibleScroll(sectionSN);
         }else{
-          clearTimeout(t);
+          clearTimeout(t);//停止timeOut
         }
      }
    );
-
    t = setTimeout(timedCount,500);//每 0.5秒调用一次
 }
 
@@ -106,6 +96,7 @@ function timedCount()
 //回调的子函数
   var successCallback = function()
   {
+      nextChapter();
       abcGlobal.Media.Under_audio();//下一章
   }
 
@@ -118,11 +109,5 @@ function timedCount()
   //回调的子函数
   var statusCallback = function(status)
   {
-      // Media.MEDIA_NONE = 0;
-      // Media.MEDIA_STARTING = 1;
-      // Media.MEDIA_RUNNING = 2;
-      // Media.MEDIA_PAUSED = 3;
-      // Media.MEDIA_STOPPED = 4;
-
-      console.log("Audio Status: " + status);
+      console.log("Audio Status: " + status);//状态
   }

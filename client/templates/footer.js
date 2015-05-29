@@ -11,7 +11,6 @@ Template.footer.events({
 		lastChapter();
 		abcGlobal.Media.on_audio();
 	},'click button[data-play]': function () {
-		
 		Session.set('isPlaying', ! Session.get('isPlaying'));
 		if(Session.get('isPlaying')){
 			abcGlobal.Media.play_audio();

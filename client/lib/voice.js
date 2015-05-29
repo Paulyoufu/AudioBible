@@ -33,7 +33,7 @@ abcGlobal.Media.on_audio = function(){
    _myMedia.release();
    var url = "application/voice/" + Session.get('currentBookName') + "第" + Session.get('currentChapter') + "章.mp3";
    _myMedia = new Media(url, successCallback, errorCallback, statusCallback);
-   _myMedia.play();
+   abcGlobal.Media.play_audio();
    Session.set('isPlaying', true);
 }
 
@@ -43,12 +43,13 @@ abcGlobal.Media.Under_audio = function(){
     _myMedia.release();
     var url = "application/voice/" + Session.get('currentBookName') + "第" + Session.get('currentChapter') + "章.mp3";
     _myMedia = new Media(url, successCallback, errorCallback, statusCallback);
-    _myMedia.play();
+    abcGlobal.Media.play_audio();
     Session.set('isPlaying', true);
 }
 
 //播放
 abcGlobal.Media.play_audio = function(){
+
   _myMedia.play();
   timedCount();
 }
@@ -67,7 +68,7 @@ abcGlobal.Media.stop_audio = function(){
 //快进
 abcGlobal.Media.fast_dorward = function(){
   //快进到330秒处
-  _myMedia.seekTo(330000);
+  _myMedia.seekTo(200000);
 }
 
 var t;

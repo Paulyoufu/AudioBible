@@ -23,6 +23,9 @@ Template.main.helpers({
 		var position = Session.get('timeValue');
 		var sectionSN = getCurrSection(position);
 		return sectionSN;         
+	},
+	dur:function(){
+		return Session.get('dur');
 	}
 });
 

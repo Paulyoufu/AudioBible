@@ -4,6 +4,6 @@ Template.bookItem.events({
 		Session.set('currentChapter', 1);
 		Session.set('currentChapterCount', this.chapterCount);
 		Session.set('currentBookName', this.fullName);
-		Session.set('isPlaying',true);
+		// Session.set('isPlaying',true);
 	}
 });

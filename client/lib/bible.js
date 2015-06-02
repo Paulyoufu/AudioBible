@@ -152,8 +152,8 @@ getCurrSection = function (position) {
 
     for (var i = 0; i < currentLection.length; i++) {
 
-        if (position < currentLection[i].soundEnd){
-            return sectionSN;
+        if (position < currentLection[i].soundEnd || currentLection[i].soundEnd === 0){
+            break;
         }
         sectionSN++;
     };

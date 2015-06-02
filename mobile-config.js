@@ -1,5 +1,5 @@
 App.info({
-  name: 'AudioBible',
+  name: '语音圣经',
   description: '语音圣经',
   author: 'Elijah',
   email: 'support@elijah.com.count',

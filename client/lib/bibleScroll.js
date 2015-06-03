@@ -2,32 +2,32 @@
  * Created by paul on 15/5/27.
  */
 Session.setDefault('sectionIndex', null);        //当前播放的section索引
+Session.setDefault("sumSection",0);
+var scrollPosition=0;
 
 BibleScroll=function(sectionIndex){
-
-
-	if(sectionIndex == Session.get('sectionIndex')){
+	if(sectionIndex == Session.get('sectionIndex')){//scrollPosition=0;
 		return;
 	}
 	Session.set('sectionIndex', sectionIndex);
-
-    console.log(sectionIndex+"----------------- sectionIndex____________________ ");
-    if(sectionIndex > $('#divBible').children('span').length - 2)
-    {
-       $("#divBible span").removeClass("green");
-        $("#divBible span").last().addClass("green");
-    }
-    else {
-        $("#divBible span").removeClass("green");
-        $("#divBible span:eq(" + sectionIndex + ")").addClass("green");
-        var contentHeight = window.screen.height / 2;
-        var centreBible = $("#divBible span:eq(" + sectionIndex + ")").offset().top - contentHeight;
-        $("#divBible").scrollTop(centreBible);
-        if (contentHeight > 0) {
-            centreBible = $("#divBible span:eq(" + sectionIndex + ")").offset().top;
-            $("#divBible").scrollTop(centreBible - 360);
-            console.log(centreBible -  360+"----------------centre1111111----------------");
+        if(Session.get("sumSection") < window.screen.height/2)
+        {  //  console.log(window.screen.height/2+"===========ttttthellotttllllllllmmmmmmm==========");
+            Session.set("sumSection",Session.get("sumSection") + $("#divBible span:eq(" + sectionIndex + ")").outerHeight(true));
+           // console.log(Session.get("sumSection")+"++++sum++++");
+            $("#divBible span").removeClass("blue");
+            $("#divBible span:eq(" + sectionIndex + ")").addClass("blue");
         }
-        console.log(centreBible -  360+"----------------centre2222222222----------------");
-    }
+        else{
+            //if(sectionIndex>15){scrollPosition=0;
+              //  console.log(scrollPosition+"          *********"+Session.get("sumSection")+"ok");}
+           scrollPosition +=$("#divBible span:eq(" + sectionIndex + ")").outerHeight();
+           // console.log($("#divBible span:eq(" + sectionIndex + ")").outerHeight()+"    hhhhhhhhhhhhhhhhhhhh");
+            $("#divBible").scrollTop(scrollPosition) ;
+            $("div span").removeClass("blue");
+            $("#divBible span:eq(" + sectionIndex + ")").addClass("blue");
+           // console.log($("#divBible span:eq(" + sectionIndex + ")").position().top);
+
+        }
+
+
 }

@@ -1,3 +1,8 @@
+Template.main.rendered = function()
+{
+	renderedAudio();
+};
+
 Template.main.helpers({
 	lectionList: function () {
 		var currentBook = Session.get('currentBook');
@@ -10,5 +15,17 @@ Template.main.helpers({
 	},
 	chapterSN: function () {
 		return Session.get('currentChapter');
+	},
+	position: function(){
+		return Session.get('timeValue');
+	},
+	section: function(){
+		var position = Session.get('timeValue');
+		var sectionSN = getCurrSection(position);
+		return sectionSN;         
+	},
+	dur:function(){
+		return Session.get('dur');
 	}
 });
+

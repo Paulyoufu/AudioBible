@@ -8,24 +8,28 @@ Template.footer.helpers({
 
 Template.footer.events({
 	'click button[data-skipbackward]': function () {
+		abcGlobal.media.clearTimeOut();
 		lastChapter();
 		abcGlobal.media.initAudio();
 		abcGlobal.media.playAudio();
-		// abcGlobal.Media.switchAudio();
+		abcGlobal.media.timedCount();
 	},'click button[data-play]': function () {
 		Session.set('isPlaying', ! Session.get('isPlaying'));
 		if(Session.get('isPlaying')){
 			abcGlobal.media.playAudio();
-			// abcGlobal.Media.play_audio();
+			abcGlobal.media.timedCount();
 		}else{
-			// abcGlobal.Media.pause_audio();
 			abcGlobal.media.pauseAudio();
+			abcGlobal.media.clearTimeOut();
 		}
 	},'click button[data-skipforward]': function () {
+		abcGlobal.media.clearTimeOut();
 		nextChapter();
 		abcGlobal.media.initAudio();
 		abcGlobal.media.playAudio();
-		// abcGlobal.Media.switchAudio();
+		abcGlobal.media.timedCount();
+	},'click button[data-kj]': function () {
+		abcGlobal.media.fastDorward();
 	}
 	
 });

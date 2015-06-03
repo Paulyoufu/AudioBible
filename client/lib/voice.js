@@ -24,6 +24,7 @@ renderedAudio = function(){
 //设置url
 abcGlobal.media.initAudio = function(){
     //这句释放资源一定要加，若没有这句会使APP卡住
+    renderedAudio();
     myMedia.release();  
     url = "application/voice/" + Session.get('currentBookName') + "第" + Session.get('currentChapter') + "章.mp3";
     myMedia = new Media(url, successCallback, errorCallback, statusCallback);
@@ -32,7 +33,6 @@ abcGlobal.media.initAudio = function(){
 //播放
 abcGlobal.media.playAudio = function(){
     myMedia.play();
-   	timedCount();//每0.5秒返回播放进度
     Session.set('isPlaying', true);
 }
 
@@ -54,34 +54,39 @@ abcGlobal.media.playAudio = function(){
  }
 
  //返回播放进度
- function timedCount()
+ abcGlobal.media.timedCount = function()
  {
- 	dur = myMedia.getDuration();
-
+ 	  dur = myMedia.getDuration();
     myMedia.getCurrentPosition(
-            // success callback
-    	function (position) {
-        	console.log("Current Position: " + position + " / " + dur);
-        	if(position != dur){
-	          Session.set('dur', dur);
-	          Session.set('timeValue', position);
-	          var sectionSN = getCurrSection(position);
-	          BibleScroll(sectionSN);
-	        }else{
-	          clearTimeout(t);//停止timeOut
-	          return;
-	        }
-        }
-    );
-    t = setTimeout(timedCount,5000);//每 0.5秒调用一次
- }
+      // success callback
+      function (position) {
+        if(dur!=-1&& position != 0){
+        	if(position >= dur){
+            //基本上不会出现
+    	    }else{
+            Session.set('dur', dur);
+            Session.set('timeValue', position);
 
+            var sectionSN = getCurrSection(position);
+            BibleScroll(sectionSN);
+    	    }
+        }
+      }
+    );
+    t = setTimeout(abcGlobal.media.timedCount,500);//每 0.5秒调用一次
+ }
+ //停止
+ abcGlobal.media.clearTimeOut = function(){
+    clearTimeout(t);
+ }
  //回调的子函数
  var successCallback = function()
  {
+    abcGlobal.media.timedCount();
     nextChapter();
     abcGlobal.media.initAudio();
     abcGlobal.media.playAudio();
+    abcGlobal.media.clearTimeOut();
  }
 
  //回调的子函数

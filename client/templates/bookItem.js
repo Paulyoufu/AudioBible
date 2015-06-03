@@ -5,5 +5,7 @@ Template.bookItem.events({
 		Session.set('currentChapterCount', this.chapterCount);
 		Session.set('currentBookName', this.fullName);
 		// Session.set('isPlaying',true);
+
+		Router.go('chaptersMenu');
 	}
 });

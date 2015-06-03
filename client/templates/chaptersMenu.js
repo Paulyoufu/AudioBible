@@ -10,5 +10,17 @@ Template.chaptersMenu.helpers({
 		};
 
 		return chapters;
+	},
+	bookName: function () {
+		return Session.get('currentBookName'); 
+	},
+	chapterSN: function () {
+		return Session.get('currentChapter');
+	}
+});
+
+Template.chaptersMenu.events({
+	'click button': function () {
+		Router.go('booksMenu');
 	}
 });

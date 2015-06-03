@@ -9,7 +9,11 @@
 	    <h1 class="title ">{{position}} | {{section}} ｜ {{dur}} </h1>
 	    <button class="button button-clear pull-right" data-ion-menu-toggle="right">
 	        <!-- {{> ionIcon icon='navicon'}} -->
-	        章 
+	      {{#if isAndroid}}
+	        {{> ionIcon icon='android-more-vertical'}}
+	      {{else}}
+	        {{> ionIcon icon='navicon'}}
+	      {{/if}}
 	    </button>
 	{{/contentFor}}
 

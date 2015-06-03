@@ -12,5 +12,6 @@ Meteor.startup(function () {
 });
 
 Router.map(function() {
-  this.route('main', {path: '/'});
+  this.route('booksMenu', {path: '/'});
+  this.route('chaptersMenu', {path: '/chapters'});
 });

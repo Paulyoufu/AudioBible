@@ -24,7 +24,6 @@ renderedAudio = function(){
 //设置url
 abcGlobal.media.initAudio = function(){
     //这句释放资源一定要加，若没有这句会使APP卡住
-    renderedAudio();
     myMedia.release();  
     url = "application/voice/" + Session.get('currentBookName') + "第" + Session.get('currentChapter') + "章.mp3";
     myMedia = new Media(url, successCallback, errorCallback, statusCallback);

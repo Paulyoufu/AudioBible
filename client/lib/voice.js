@@ -19,7 +19,7 @@ renderedAudio = function(){
     //不加这段播放不了
     var url = "application/voice/创世记第1章.mp3";
     myMedia = new Media(url, successCallback, errorCallback, statusCallback);
-  }
+}
 
 //设置url
 abcGlobal.media.initAudio = function(){
@@ -27,7 +27,7 @@ abcGlobal.media.initAudio = function(){
     myMedia.release();  
     url = "application/voice/" + Session.get('currentBookName') + "第" + Session.get('currentChapter') + "章.mp3";
     myMedia = new Media(url, successCallback, errorCallback, statusCallback);
-  }
+}
 
 //播放
 abcGlobal.media.playAudio = function(){
@@ -36,25 +36,25 @@ abcGlobal.media.playAudio = function(){
 }
 
  //暂停
- abcGlobal.media.pauseAudio = function(){
+abcGlobal.media.pauseAudio = function(){
   myMedia.pause();
 }
 
  //停止播放
- abcGlobal.media.stopAudio = function(){
+abcGlobal.media.stopAudio = function(){
    myMedia.seekTo(0);
    myMedia.pause();
- }
+}
 
- //快进
- abcGlobal.media.fastDorward = function(){
+//快进
+abcGlobal.media.fastDorward = function(){
   //快进到330秒处
   myMedia.seekTo(280000);
 }
 
- //返回播放进度
- abcGlobal.media.timedCount = function()
- {
+//返回播放进度
+abcGlobal.media.timedCount = function()
+{
     dur = myMedia.getDuration();
     myMedia.getCurrentPosition(
       // success callback
@@ -73,20 +73,21 @@ abcGlobal.media.playAudio = function(){
       }, 
       function (e) {
         clearTimeout(t);
-        alert("出现错误");
         console.log("Error Getting Position=" + e);
       }
-    );
+      );
     t = setTimeout(abcGlobal.media.timedCount,500);//每 0.5秒调用一次
-  }
- //停止
- abcGlobal.media.clearTimeOut = function(){
+}
+
+//停止
+abcGlobal.media.clearTimeOut = function(){
   clearTimeout(t);
 }
- //回调的子函数
- var successCallback = function()
- {
-  
+
+//回调的子函数
+var successCallback = function()
+{
+
   abcGlobal.media.clearTimeOut();
   nextChapter();
   abcGlobal.media.initAudio();
@@ -94,14 +95,15 @@ abcGlobal.media.playAudio = function(){
   abcGlobal.media.timedCount();
 }
 
- //回调的子函数
- var errorCallback = function(error)
- {
+//回调的子函数
+var errorCallback = function(error)
+{
   console.log("Audio Error: " + err);
 }
 
  //回调的子函数
- var statusCallback = function(status)
- {
-      console.log("Audio Status: " + status);//状态
-    }
+var statusCallback = function(status)
+{
+  alert(status);
+  console.log("Audio Status: " + status);//状态
+}

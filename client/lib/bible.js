@@ -4,8 +4,8 @@ Session.setDefault('currentBook', 1);           //当前书卷SN
 Session.setDefault('currentBookName', '创世记'); //当前书卷名字
 Session.setDefault('currentChapter', 1);        //当前章SN
 Session.setDefault('currentChapterCount', 50);  //当前书卷章数
-Session.setDefault('chapterCountIndex', {});    //每卷书章数索引
-Session.setDefault('bookNameIndex', {});        //每卷书名字索引
+Session.setDefault('chapterCountIndex', null);  //每卷书章数索引
+Session.setDefault('bookNameIndex', null);      //每卷书名字索引
 
 // volumeSN 书卷号 chapterSN 章号
 getLection = function (volumeSN, chapterSN) {
@@ -42,6 +42,10 @@ getLection = function (volumeSN, chapterSN) {
 // 获取书卷目录 sn 章数 书名
 // newOrOld 0 旧约 1 新约 2全部
 getBooksList = function (newOrOld) {
+
+  if (Session.get('booksList') != [] && Session.get('bookNameIndex') != null && Session.get('chapterCountIndex') != null){
+    return;
+  }
   // 打开数据库
   var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
 

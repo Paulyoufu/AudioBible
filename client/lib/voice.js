@@ -73,7 +73,7 @@ abcGlobal.media.timedCount = function()
       }, 
       function (e) {
         clearTimeout(t);
-        console.log("Error Getting Position=" + e);
+        // console.log("Error Getting Position=" + e);
       }
       );
     t = setTimeout(abcGlobal.media.timedCount,500);//每 0.5秒调用一次
@@ -98,12 +98,11 @@ var successCallback = function()
 //回调的子函数
 var errorCallback = function(error)
 {
-  console.log("Audio Error: " + err);
+  // console.log("Audio Error: " + err);
 }
 
  //回调的子函数
 var statusCallback = function(status)
 {
-  alert(status);
-  console.log("Audio Status: " + status);//状态
+  // console.log("Audio Status: " + status);//状态
 }

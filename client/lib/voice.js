@@ -32,7 +32,7 @@ abcGlobal.media.initAudio = function(){
 //播放
 abcGlobal.media.playAudio = function(){
   myMedia.play();
-  Session.set('isPlaying', true);
+  // Session.set('isPlaying', true);
 }
 
  //暂停
@@ -87,7 +87,6 @@ abcGlobal.media.clearTimeOut = function(){
 //回调的子函数
 var successCallback = function()
 {
-
   abcGlobal.media.clearTimeOut();
   nextChapter();
   abcGlobal.media.initAudio();

@@ -9,6 +9,7 @@ Template.footer.helpers({
 Template.footer.events({
 	'click button[data-skipbackward]': function () {
 		abcGlobal.media.clearTimeOut();
+       // BibleScrollTop();
 		lastChapter();
 		abcGlobal.media.initAudio();
 		abcGlobal.media.playAudio();
@@ -24,6 +25,7 @@ Template.footer.events({
 		}
 	},'click button[data-skipforward]': function () {
 		abcGlobal.media.clearTimeOut();
+        BibleScrollTop();
 		nextChapter();
 		abcGlobal.media.initAudio();
 		abcGlobal.media.playAudio();

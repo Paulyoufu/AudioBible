@@ -66,6 +66,9 @@ abcGlobal.media.timedCount = function()
           }else{
             Session.set('dur', dur);
             Session.set('timeValue', position);
+               // Session.set("sumSection",0);
+               // Session.set("scrollPosition",0);
+
             var sectionSN = getCurrSection(position);
             BibleScroll(sectionSN);
           }
@@ -89,6 +92,7 @@ var successCallback = function()
 {
 
   abcGlobal.media.clearTimeOut();
+     BibleScrollTop();
   nextChapter();
   abcGlobal.media.initAudio();
   abcGlobal.media.playAudio();

@@ -28,8 +28,9 @@ Template.footer.events({
 		abcGlobal.media.initAudio();
 		abcGlobal.media.playAudio();
 		abcGlobal.media.timedCount();
-	},'click button[data-kj]': function () {
-		abcGlobal.media.fastDorward();
 	}
+	// ,'click button[data-kj]': function () {
+	// 	abcGlobal.media.fastDorward();
+	// }
 	
 });

@@ -18,7 +18,7 @@ Meteor.startup(function () {
 //初始化url  
 renderedAudio = function(){
     //不加这段播放不了
-    var url = "application/voice/1-1.mp3";
+    url = "application/voice/" + Session.get('currentBook') + "-" + Session.get('currentChapter') + ".mp3";
     myMedia = new Media(url, successCallback, errorCallback, statusCallback);
 }
 

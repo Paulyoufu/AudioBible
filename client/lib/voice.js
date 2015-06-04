@@ -55,41 +55,41 @@ abcGlobal.media.fastDorward = function(){
 }
 
 //返回播放进度
-abcGlobal.media.timedCount = function()
-{
-  if(Session.get('lrcStyle')){
-    dur = myMedia.getDuration();
-    myMedia.getCurrentPosition(
-      // success callback
-      function (position) {
-        if(dur!=-1&& position != 0){
-        	if(position >= dur){
-            clearTimeout(t);
-            //基本上不会出现
-          }else{
-            Session.set('dur', dur);
-            Session.set('timeValue', position);
-            Session.set("sumSection",0);
-            Session.set("scrollPosition",0);
-            var sectionSN = getCurrSection(position);
-            BibleScroll(sectionSN);
-          }
-        }
-      }, 
-      function (e) {
-        clearTimeout(t);
-        // console.log("Error Getting Position=" + e);
-      }
-    );
-  }
-  t = setTimeout(abcGlobal.media.timedCount,500);//每 0.5秒调用一次
+// abcGlobal.media.timedCount = function()
+// {
+//   if(Session.get('lrcStyle')){
+//     dur = myMedia.getDuration();
+//     myMedia.getCurrentPosition(
+//       // success callback
+//       function (position) {
+//         if(dur!=-1&& position != 0){
+//         	if(position >= dur){
+//             clearTimeout(t);
+//             //基本上不会出现
+//           }else{
+//             Session.set('dur', dur);
+//             Session.set('timeValue', position);
+//             Session.set("sumSection",0);
+//             Session.set("scrollPosition",0);
+//             var sectionSN = getCurrSection(position);
+//             BibleScroll(sectionSN);
+//           }
+//         }
+//       }, 
+//       function (e) {
+//         clearTimeout(t);
+//         // console.log("Error Getting Position=" + e);
+//       }
+//     );
+//   }
+//   t = setTimeout(abcGlobal.media.timedCount,500);//每 0.5秒调用一次
   
-}
+// }
 
 //停止
-abcGlobal.media.clearTimeOut = function(){
-  clearTimeout(t);
-}
+// abcGlobal.media.clearTimeOut = function(){
+//   clearTimeout(t);
+// }
 
 //回调的子函数
 var successCallback = function()

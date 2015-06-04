@@ -10,6 +10,7 @@ Template.footer.events({
 	'click button[data-skipbackward]': function () {
         BibleScrollTop();
 		lastChapter();
+		SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
 		//播放
 		abcGlobal.media.initAudio();
 		if(Session.get('isPlaying')){
@@ -29,15 +30,13 @@ Template.footer.events({
 
         BibleScrollTop();
 		nextChapter();
+		SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
 		//播放
 		abcGlobal.media.initAudio();
 		if(Session.get('isPlaying')){
 			abcGlobal.media.playAudio();
 		}
 	}
-	// ,'click button[data-kj]': function () {
-	// 	abcGlobal.media.fastDorward();
-	// }
 	
 });
 

@@ -10,8 +10,6 @@ Session.setDefault('selectedBook', null);             //padding的书卷SN
 Session.setDefault('selectedChapterCount', null);     //padding的书卷章数
 Session.setDefault('selectedBookName', null);         //padding的书卷名字
 
-
-
 // 获取指定书卷、章的经文列表
 // volumeSN 书卷号 chapterSN 章号
 getLection = function (volumeSN, chapterSN) {
@@ -195,6 +193,9 @@ getSetting = function () {
         Session.set('currentBookName', Session.get('bookNameIndex')['bookSN'+setting.lastbook]);
         Session.set('currentChapterCount', Session.get('chapterCountIndex')['bookSN'+setting.lastbook]);
 
+        //初始化audio
+        renderedAudio();
+
       }, function(e) {
         console.log("ERROR: " + e.message);
       });
@@ -225,7 +226,8 @@ Meteor.startup(function () {
     //将整本书卷名从数据库查询到，存到Session:booksList
     getBooksList(2);
 
-    //获取设置项，存到Session:setting
+    //获取设置项，更新Session
     getSetting();
+    //console.log('afterGetSetting:' + Session.get('currentBook') + '-' + Session.get('currentChapter'));
 
 });

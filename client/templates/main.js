@@ -1,7 +1,6 @@
 Template.main.rendered = function()
 {
-	renderedAudio();
-	// abcGlobal.media.timedCount();
+	
 };
 
 Template.main.helpers({

@@ -27,6 +27,7 @@ Template.footer.events({
 		}else{
 			abcGlobal.media.pauseAudio();
 			abcGlobal.media.clearTimeOut();
+            $("#divBible span").removeClass("blue");
 		}
 	},'click button[data-skipforward]': function () {
 

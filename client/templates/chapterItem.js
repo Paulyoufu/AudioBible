@@ -3,6 +3,8 @@ Template.chapterItem.events({
 		
 		Session.set('currentBook', Session.get('selectedBook'));
 		Session.set('currentChapter', this.chapterSN);
+
+		abcGlobal.media.initAudio();
 		Session.set('currentChapterCount', Session.get('selectedChapterCount'));
 		Session.set('currentBookName', Session.get('selectedBookName'));
 
@@ -11,10 +13,7 @@ Template.chapterItem.events({
 
 		if(Session.get('isPlaying')){
 			//播放
-			abcGlobal.media.clearTimeOut();
-			abcGlobal.media.initAudio();
 			abcGlobal.media.playAudio();
-			abcGlobal.media.timedCount();
 		}
         CharpterScrollTop();
 	}

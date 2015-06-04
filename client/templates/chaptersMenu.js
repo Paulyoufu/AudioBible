@@ -16,6 +16,9 @@ Template.chaptersMenu.helpers({
 	},
 	chapterSN: function () {
 		return Session.get('currentChapter');
+	},
+	selectedBookName: function () {
+		return Session.get('selectedBookName');
 	}
 });
 

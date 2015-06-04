@@ -7,6 +7,7 @@ Session.setDefault('currentChapterCount', 50);  //当前书卷章数
 Session.setDefault('chapterCountIndex', null);  //每卷书章数索引
 Session.setDefault('bookNameIndex', null);      //每卷书名字索引
 
+// 获取指定书卷、章的经文列表
 // volumeSN 书卷号 chapterSN 章号
 getLection = function (volumeSN, chapterSN) {
   // 打开数据库
@@ -164,3 +165,62 @@ getCurrSection = function (position) {
 
     return sectionSN;
 }
+
+// 获取设置项
+getSetting = function () {
+    // 打开数据库
+  var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
+
+  db.transaction(function(tx) {
+    //单次查询Bible表
+    var strSQL = "select ID as id, lastBook as lastbook, lastChapter as lastchapter from Setting where ID='1';";
+
+    tx.executeSql(strSQL, [], 
+      function(tx, res) {
+        var setting = {};
+        for(var i=0;i<res.rows.length;i++)
+        {
+          setting.lastbook = res.rows.item(i).lastbook;
+          setting.lastchapter = res.rows.item(i).lastchapter;
+          //console.log("读取到了：" + res.rows.item(i).lastbook.toString() + "-" + res.rows.item(i).lastchapter.toString());
+        }
+
+        Session.set('currentBook', setting.lastbook);
+        Session.set('currentChapter', setting.lastchapter);
+        Session.set('currentBookName', Session.get('bookNameIndex')['bookSN'+setting.lastbook]);
+        Session.set('currentChapterCount', Session.get('chapterCountIndex')['bookSN'+setting.lastbook]);
+
+      }, function(e) {
+        console.log("ERROR: " + e.message);
+      });
+  });
+}
+
+// 设置设置项
+setSetting = function (lastBook, lastChapter) {
+
+    // 打开数据库
+    var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
+
+    db.transaction(function(tx) {
+      //更新Setting表
+      var strSQL = "update Setting set lastBook='" + lastBook + "', lastChapter='" + lastChapter + "' where ID='1';";
+
+      tx.executeSql(strSQL, [], 
+        function(tx, res) {
+             //console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+        }, function(e) {
+          console.log("ERROR: " + e.message);
+        });
+    });
+}
+
+Meteor.startup(function () {
+
+    //将整本书卷名从数据库查询到，存到Session:booksList
+    getBooksList(2);
+
+    //获取设置项，存到Session:setting
+    getSetting();
+
+});

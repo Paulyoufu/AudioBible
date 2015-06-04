@@ -16,5 +16,6 @@ Template.chapterItem.events({
 			abcGlobal.media.playAudio();
 			abcGlobal.media.timedCount();
 		}
+        CharpterScrollTop();
 	}
 });

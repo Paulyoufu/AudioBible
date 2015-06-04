@@ -17,7 +17,7 @@ Meteor.startup(function () {
 //初始化url  
 renderedAudio = function(){
     //不加这段播放不了
-    var url = "application/voice/创世记第1章.mp3";
+    var url = "application/voice/1-1.mp3";
     myMedia = new Media(url, successCallback, errorCallback, statusCallback);
 }
 
@@ -25,7 +25,7 @@ renderedAudio = function(){
 abcGlobal.media.initAudio = function(){
     //这句释放资源一定要加，若没有这句会使APP卡住
     myMedia.release();  
-    url = "application/voice/" + Session.get('currentBookName') + "第" + Session.get('currentChapter') + "章.mp3";
+    url = "application/voice/" + Session.get('currentBook') + "-" + Session.get('currentChapter') + ".mp3";
     myMedia = new Media(url, successCallback, errorCallback, statusCallback);
 }
 
@@ -66,6 +66,9 @@ abcGlobal.media.timedCount = function()
           }else{
             Session.set('dur', dur);
             Session.set('timeValue', position);
+               // Session.set("sumSection",0);
+               // Session.set("scrollPosition",0);
+
             var sectionSN = getCurrSection(position);
             BibleScroll(sectionSN);
           }
@@ -88,6 +91,7 @@ abcGlobal.media.clearTimeOut = function(){
 var successCallback = function()
 {
   abcGlobal.media.clearTimeOut();
+  BibleScrollTop();
   nextChapter();
   abcGlobal.media.initAudio();
   abcGlobal.media.playAudio();

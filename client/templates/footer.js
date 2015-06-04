@@ -8,7 +8,9 @@ Template.footer.helpers({
 
 Template.footer.events({
 	'click button[data-skipbackward]': function () {
-		
+
+		abcGlobal.media.clearTimeOut();
+       // BibleScrollTop();
 		lastChapter();
 		if(Session.get('isPlaying')){
 			//播放
@@ -27,6 +29,9 @@ Template.footer.events({
 			abcGlobal.media.clearTimeOut();
 		}
 	},'click button[data-skipforward]': function () {
+
+		abcGlobal.media.clearTimeOut();
+        BibleScrollTop();
 		nextChapter();
 		if(Session.get('isPlaying')){
 			//播放

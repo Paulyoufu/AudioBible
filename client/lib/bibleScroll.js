@@ -33,3 +33,6 @@ BibleScrollTop=function(){
     Session.set("sumSectionHeight",0);
     Session.set("scrollPosition",0);
 }
+CharpterScrollTop=function(){
+    $("#charpterList").scrollTop($("div div:eq(0)").position().top);
+}

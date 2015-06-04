@@ -5,7 +5,6 @@ Template.chapterItem.events({
 		Session.set('currentChapter', this.chapterSN);
 
 		abcGlobal.media.initAudio();
-
 		Session.set('currentChapterCount', Session.get('selectedChapterCount'));
 		Session.set('currentBookName', Session.get('selectedBookName'));
 
@@ -16,5 +15,6 @@ Template.chapterItem.events({
 			//播放
 			abcGlobal.media.playAudio();
 		}
+        CharpterScrollTop();
 	}
 });

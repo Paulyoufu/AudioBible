@@ -18,12 +18,12 @@
 		<button class="button button-clear pull-left">
 	       返回
 	    </button>
-		<h1 class="title">选择章</h1>
+		<h1 class="title">{{selectedBookName}}</h1>
 	</div>
 
 	{{#ionView}}
 	{{#ionContent}}
-	<div class="list">
+	<div id="charpterList" class="list" style="height:100%;overflow-y:scroll;overflow-x:hidden;">
 		{{#each chapters}}
 			{{> chapterItem}}
 		{{/each}}

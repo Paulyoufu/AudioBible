@@ -1,6 +1,7 @@
 Template.chapterItem.events({
 	'click': function () {
 		Session.set('currentChapter', this.chapterSN);
+
 		if(Session.get('isPlaying')){
 			//播放
 			abcGlobal.media.clearTimeOut();
@@ -8,5 +9,6 @@ Template.chapterItem.events({
 			abcGlobal.media.playAudio();
 			abcGlobal.media.timedCount();
 		}
+		setSetting(Session.get('currentBook'), this.chapterSN);
 	}
 });

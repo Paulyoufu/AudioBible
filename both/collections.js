@@ -1,25 +1,22 @@
 Posts = new Mongo.Collection('posts');
 
 Posts.attachSchema(new SimpleSchema({
-  title: {
-    type: String,
-    max: 200,
-    autoform: {
-      'label-type': 'stacked'
-    }
+  bookSN: {
+    type: Number
   },
-  body: {
-    type: String,
-    autoform: {
-      rows: 10,
-      'label-type': 'stacked'
-    }
+  chapterSN: {
+    type: Number
   },
-  published: {
-    type: Boolean,
-    defaultValue: true,
-    autoform: {
-      type: 'toggle'
-    }
+  createTime: {
+    type: String
   }
 }));
+
+SendMsg = function (bookSN, chapterSN) {
+    var myDate = new Date();
+    Posts.insert({
+      bookSN: bookSN,
+      chapterSN: chapterSN,
+      createTime: 'myDate.toLocaleTimeString()'
+    });
+}

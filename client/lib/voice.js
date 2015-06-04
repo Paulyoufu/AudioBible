@@ -96,6 +96,8 @@ var successCallback = function()
   abcGlobal.media.initAudio();
   abcGlobal.media.playAudio();
   abcGlobal.media.timedCount();
+
+  SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
 }
 
 //回调的子函数

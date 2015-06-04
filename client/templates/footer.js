@@ -8,38 +8,31 @@ Template.footer.helpers({
 
 Template.footer.events({
 	'click button[data-skipbackward]': function () {
-
-		abcGlobal.media.clearTimeOut();
-       // BibleScrollTop();
+        BibleScrollTop();
 		lastChapter();
+		//播放
+		abcGlobal.media.initAudio();
 		if(Session.get('isPlaying')){
-			//播放
-			abcGlobal.media.clearTimeOut();
-			abcGlobal.media.initAudio();
 			abcGlobal.media.playAudio();
-			abcGlobal.media.timedCount();
 		}
 	},'click button[data-play]': function () {
 		Session.set('isPlaying', ! Session.get('isPlaying'));
 		if(Session.get('isPlaying')){
 			abcGlobal.media.playAudio();
-			abcGlobal.media.timedCount();
+			Session.set('lrcStyle',true);
 		}else{
 			abcGlobal.media.pauseAudio();
-			abcGlobal.media.clearTimeOut();
+			Session.set('lrcStyle',false);
             $("#divBible span").removeClass("blue");
 		}
 	},'click button[data-skipforward]': function () {
 
-		abcGlobal.media.clearTimeOut();
         BibleScrollTop();
 		nextChapter();
+		//播放
+		abcGlobal.media.initAudio();
 		if(Session.get('isPlaying')){
-			//播放
-			abcGlobal.media.clearTimeOut();
-			abcGlobal.media.initAudio();
 			abcGlobal.media.playAudio();
-			abcGlobal.media.timedCount();
 		}
 	}
 	// ,'click button[data-kj]': function () {

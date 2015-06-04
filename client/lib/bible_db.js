@@ -6,6 +6,11 @@ Session.setDefault('currentChapter', 1);        //当前章SN
 Session.setDefault('currentChapterCount', 50);  //当前书卷章数
 Session.setDefault('chapterCountIndex', null);  //每卷书章数索引
 Session.setDefault('bookNameIndex', null);      //每卷书名字索引
+Session.setDefault('selectedBook', null);             //padding的书卷SN
+Session.setDefault('selectedChapterCount', null);     //padding的书卷章数
+Session.setDefault('selectedBookName', null);         //padding的书卷名字
+
+
 
 // 获取指定书卷、章的经文列表
 // volumeSN 书卷号 chapterSN 章号

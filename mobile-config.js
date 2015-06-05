@@ -2,7 +2,7 @@ App.info({
   name: '语音圣经',
   description: '语音圣经',
   author: 'Elijah',
-  email: 'support@elijah.com.count',
+  email: 'support@elijah.com.cn',
   website: '',
   version: '1.0.0'
 });

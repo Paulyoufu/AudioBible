@@ -1,9 +1,9 @@
 App.info({
   name: '语音圣经',
-  description: '语音圣经',
-  author: 'Elijah',
+  description: '一键聆听神的话',
+  author: '沈阳以利亚科技有限公司',
   email: 'support@elijah.com.cn',
-  website: '',
+  website: 'www.elijah.com.cn',
   version: '1.0.0'
 });
 

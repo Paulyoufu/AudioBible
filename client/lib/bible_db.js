@@ -10,11 +10,12 @@ Session.setDefault('selectedBook', null);             //padding的书卷SN
 Session.setDefault('selectedChapterCount', null);     //padding的书卷章数
 Session.setDefault('selectedBookName', null);         //padding的书卷名字
 
+
 // 获取指定书卷、章的经文列表
 // volumeSN 书卷号 chapterSN 章号
 getLection = function (volumeSN, chapterSN) {
   // 打开数据库
-  var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
+  // var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
 
   db.transaction(function(tx) {
     //单次查询Bible表
@@ -38,7 +39,7 @@ getLection = function (volumeSN, chapterSN) {
         Session.set('lectionList', lectionList);
 
       }, function(e) {
-        console.log("ERROR: " + e.message);
+        console.log("ERROR: getLection " + e.message);
       });
   });
 }
@@ -51,7 +52,7 @@ getBooksList = function (newOrOld) {
     return;
   }
   // 打开数据库
-  var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
+  // var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
 
   db.transaction(function(tx) {
 
@@ -90,7 +91,7 @@ getBooksList = function (newOrOld) {
         Session.set('chapterCountIndex', chapterCountIndex);
 
       }, function(e) {
-        console.log("ERROR: " + e.message);
+        console.log("ERROR: getBooksList " + e.message);
       });
   });
 }
@@ -172,7 +173,7 @@ getCurrSection = function (position) {
 // 获取设置项
 getSetting = function () {
     // 打开数据库
-  var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
+  // var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
 
   db.transaction(function(tx) {
     //单次查询Bible表
@@ -194,10 +195,10 @@ getSetting = function () {
         Session.set('currentChapterCount', Session.get('chapterCountIndex')['bookSN'+setting.lastbook]);
 
         //初始化audio
-        renderedAudio();
+        abcGlobal.media.initAudio();
 
       }, function(e) {
-        console.log("ERROR: " + e.message);
+        console.log("ERROR: getSetting " + e.message);
       });
   });
 }
@@ -206,7 +207,8 @@ getSetting = function () {
 setSetting = function (lastBook, lastChapter) {
 
     // 打开数据库
-    var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
+    // var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
+    // var db = Session.get('db');
 
     db.transaction(function(tx) {
       //更新Setting表
@@ -216,12 +218,14 @@ setSetting = function (lastBook, lastChapter) {
         function(tx, res) {
              //console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
         }, function(e) {
-          console.log("ERROR: " + e.message);
+          console.log("ERROR: setSetting " + e.message);
         });
     });
 }
 
 Meteor.startup(function () {
+
+    db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
 
     //将整本书卷名从数据库查询到，存到Session:booksList
     getBooksList(2);

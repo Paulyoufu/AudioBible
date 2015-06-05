@@ -4,8 +4,8 @@ abcGlobal = {};//总结点
 abcGlobal.media = {};//媒体节点
 Session.setDefault('lrcStyle', false);//是否调用LRC字幕,true直播滚动LRC，FALSE不支持
 Session.setDefault('timeValue', 0);//播放进度
-var myMedia;//媒体实例
-var url;//播放地址
+var myMedia = null;//媒体实例
+var url = null;//播放地址
 var t;//timeOut对象
 var dur;//章节时间
 
@@ -15,24 +15,19 @@ Meteor.startup(function () {
     cordova.plugins.backgroundMode.enable();
   });
 
-//初始化url  
-renderedAudio = function(){
-    //不加这段播放不了
-    url = "application/voice/" + Session.get('currentBook') + "-" + Session.get('currentChapter') + ".mp3";
-    myMedia = new Media(url, successCallback, errorCallback, statusCallback);
-}
-
 //设置url
 abcGlobal.media.initAudio = function(){
-    
-    //这句释放资源一定要加，若没有这句会使APP卡住
-    myMedia.release();  
     url = "application/voice/" + Session.get('currentBook') + "-" + Session.get('currentChapter') + ".mp3";
-    myMedia = new Media(url, successCallback, errorCallback, statusCallback);
 }
 
 //播放
 abcGlobal.media.playAudio = function(){
+
+  //这句释放资源一定要加，若没有这句会使APP卡住
+  if (myMedia != null){
+      myMedia.release(); 
+  }
+  myMedia = new Media(url, successCallback, errorCallback, statusCallback);
   myMedia.play();
   // Session.set('isPlaying', true);
 }
@@ -99,7 +94,8 @@ var successCallback = function()
   abcGlobal.media.initAudio();
   abcGlobal.media.playAudio();
 
-  SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
+  // 记录本次读经位置
+  setSetting(Session.get('currentBook'), this.chapterSN);
 }
 
 //回调的子函数

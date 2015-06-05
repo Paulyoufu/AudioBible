@@ -10,14 +10,19 @@ Template.footer.events({
 	'click button[data-skipbackward]': function () {
         BibleScrollTop();
 		lastChapter();
-		SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
+
 		//播放
 		abcGlobal.media.initAudio();
 		if(Session.get('isPlaying')){
 			abcGlobal.media.playAudio();
 		}
+
+        // 记录本次读经位置
+		setSetting(Session.get('currentBook'), this.chapterSN);
 	},'click button[data-play]': function () {
+
 		Session.set('isPlaying', ! Session.get('isPlaying'));
+
 		if(Session.get('isPlaying')){
 			abcGlobal.media.playAudio();
 			Session.set('lrcStyle',true);
@@ -26,16 +31,20 @@ Template.footer.events({
 			Session.set('lrcStyle',false);
             $("#divBible span").removeClass("blue");
 		}
+		
 	},'click button[data-skipforward]': function () {
 
         BibleScrollTop();
 		nextChapter();
-		SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
+
 		//播放
 		abcGlobal.media.initAudio();
 		if(Session.get('isPlaying')){
 			abcGlobal.media.playAudio();
 		}
+
+        // 记录本次读经位置
+		setSetting(Session.get('currentBook'), this.chapterSN);
 	}
 	
 });

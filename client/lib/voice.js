@@ -95,7 +95,10 @@ var successCallback = function()
   abcGlobal.media.playAudio();
 
   // 记录本次读经位置
-  setSetting(Session.get('currentBook'), this.chapterSN);
+  setSetting(Session.get('currentBook'), Session.get('currentChapter'));
+
+  // 记录本次播放书、章
+  SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
 }
 
 //回调的子函数

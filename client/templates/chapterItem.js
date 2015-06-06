@@ -16,6 +16,6 @@ Template.chapterItem.events({
         BibleScrollTop();
 
         // 记录本次读经位置
-		setSetting(Session.get('currentBook'), this.chapterSN);
+		setSetting(Session.get('currentBook'), Session.get('currentChapter'));
 	}
 });

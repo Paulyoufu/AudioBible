@@ -1,7 +1,3 @@
-Template.booksMenu.rendered = function () {
-
-};
-
 Template.booksMenu.helpers({
 	booksList: function () {
 		return Session.get('booksList');

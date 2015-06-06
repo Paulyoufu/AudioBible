@@ -10,7 +10,6 @@ Session.setDefault('selectedBook', null);             //padding的书卷SN
 Session.setDefault('selectedChapterCount', null);     //padding的书卷章数
 Session.setDefault('selectedBookName', null);         //padding的书卷名字
 
-
 // 获取指定书卷、章的经文列表
 // volumeSN 书卷号 chapterSN 章号
 getLection = function (volumeSN, chapterSN) {
@@ -208,7 +207,6 @@ setSetting = function (lastBook, lastChapter) {
 
     // 打开数据库
     // var db = window.sqlitePlugin.openDatabase({name: "bible.db", createFromLocation: 1});
-    // var db = Session.get('db');
 
     db.transaction(function(tx) {
       //更新Setting表

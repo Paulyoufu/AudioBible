@@ -9,7 +9,7 @@ App.info({
 
 App.icons({
   // iOS
-  'iphone': 'resources/icons/icon-60x60.png',
+  'iphone': 'resources/icons/icon-57x57.png',
   'iphone_2x': 'resources/icons/icon-60x60@2x.png',
   'ipad': 'resources/icons/icon-72x72.png',
   'ipad_2x': 'resources/icons/icon-72x72@2x.png',

@@ -1,6 +1,6 @@
 Template.chaptersMenu.helpers({
 	chapters: function () {
-		var currentChapterCount = Session.get('currentChapterCount');
+		var currentChapterCount = Session.get('selectedChapterCount');
 		var chapters = [];
 
 		for (var i = 0; i < currentChapterCount; i++) {
@@ -16,6 +16,9 @@ Template.chaptersMenu.helpers({
 	},
 	chapterSN: function () {
 		return Session.get('currentChapter');
+	},
+	selectedBookName: function () {
+		return Session.get('selectedBookName');
 	}
 });
 

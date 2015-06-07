@@ -8,29 +8,46 @@ Template.footer.helpers({
 
 Template.footer.events({
 	'click button[data-skipbackward]': function () {
-		abcGlobal.media.clearTimeOut();
+        BibleScrollTop();
 		lastChapter();
+
+		//播放
 		abcGlobal.media.initAudio();
-		abcGlobal.media.playAudio();
-		abcGlobal.media.timedCount();
-	},'click button[data-play]': function () {
-		Session.set('isPlaying', ! Session.get('isPlaying'));
 		if(Session.get('isPlaying')){
 			abcGlobal.media.playAudio();
-			abcGlobal.media.timedCount();
+		}
+
+        // 记录本次读经位置
+		setSetting(Session.get('currentBook'), Session.get('currentChapter'));
+	},'click button[data-play]': function () {
+
+		Session.set('isPlaying', ! Session.get('isPlaying'));
+
+		if(Session.get('isPlaying')){
+			abcGlobal.media.playAudio();
+			Session.set('lrcStyle',true);
 		}else{
 			abcGlobal.media.pauseAudio();
-			abcGlobal.media.clearTimeOut();
+			Session.set('lrcStyle',false);
+            $("#divBible span").removeClass("blue");
 		}
+		  // 记录本次播放书、章
+		  SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
+		  
 	},'click button[data-skipforward]': function () {
-		abcGlobal.media.clearTimeOut();
+
+        BibleScrollTop();
 		nextChapter();
+
+		//播放
 		abcGlobal.media.initAudio();
-		abcGlobal.media.playAudio();
-		abcGlobal.media.timedCount();
+		if(Session.get('isPlaying')){
+			abcGlobal.media.playAudio();
+		}
+
+        // 记录本次读经位置
+		setSetting(Session.get('currentBook'), Session.get('currentChapter'));
 	}
-	// ,'click button[data-kj]': function () {
-	// 	abcGlobal.media.fastDorward();
-	// }
 	
 });
+

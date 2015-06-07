@@ -1,6 +1,6 @@
 Template.main.rendered = function()
 {
-	renderedAudio();
+	
 };
 
 Template.main.helpers({

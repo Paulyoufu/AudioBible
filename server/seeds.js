@@ -1,11 +1,6 @@
 Meteor.startup(function () {
-
-  if (Posts.find({}).count() === 0) {
-    Posts.insert({
-      title: Fake.sentence(),
-      body: Fake.paragraph(),
-      published: Fake.fromArray([true, false])
-    });
-  }
-
+	Meteor.onConnection(function(conn) {
+		// console.log("Client IP: "+conn.clientAddress);
+		SendIP(conn.clientAddress);
+	});
 });

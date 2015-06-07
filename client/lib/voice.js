@@ -89,6 +89,9 @@ abcGlobal.media.fastDorward = function(){
 //回调的子函数
 var successCallback = function()
 {
+  // 记录本次播放书、章
+  SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
+
   BibleScrollTop();
   nextChapter();
   abcGlobal.media.initAudio();
@@ -97,8 +100,6 @@ var successCallback = function()
   // 记录本次读经位置
   setSetting(Session.get('currentBook'), Session.get('currentChapter'));
 
-  // 记录本次播放书、章
-  SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
 }
 
 //回调的子函数

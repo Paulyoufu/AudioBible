@@ -31,8 +31,6 @@ Template.footer.events({
 			Session.set('lrcStyle',false);
             $("#divBible span").removeClass("blue");
 		}
-		  // 记录本次播放书、章
-		  SendMsg(Session.get('currentBook'), Session.get('currentChapter'));
 		  
 	},'click button[data-skipforward]': function () {
 

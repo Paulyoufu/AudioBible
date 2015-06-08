@@ -4,15 +4,15 @@ App.info({
   author: '沈阳以利亚科技有限公司',
   email: 'support@elijah.com.cn',
   website: 'www.elijah.com.cn',
-  version: '1.0.2'
+  version: '1.0.3'
 });
 
 App.icons({
   // iOS
   'iphone': 'resources/icons/icon-57x57.png',
   'iphone_2x': 'resources/icons/icon-60x60@2x.png',
-  'ipad': 'resources/icons/icon-72x72.png',
-  'ipad_2x': 'resources/icons/icon-72x72@2x.png',
+  'ipad': 'resources/icons/icon-76x76.png',
+  'ipad_2x': 'resources/icons/icon-76x76@2x.png',
 
   // Android
   'android_ldpi': 'resources/icons/icon-36x36.png',
